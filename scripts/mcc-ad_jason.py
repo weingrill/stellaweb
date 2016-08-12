@@ -38,24 +38,14 @@ print "A/D port 1: %f V %e mbar" % (val, mbar)
 
 # prepare JSON data block
 
-timestamp = datetime.strftime(datetime.now(),'%Y-%m-%dT%H:%M:%S')
+timestamp = datetime.strftime(datetime.now(),'%Y-%m-%d %H:%M:%S')
 
 data = json.loads(json.dumps({
-    'timestamp': timestamp,
+    'datemeas': timestamp,
     'counts': counts,
     'volts': val,
     'mbar': mbar
-}, default=serializer))
-
-request = requests.post(API_URL + 'ingest/', auth=(API_USER, API_PASS), json=data)
-
-if request.status_code != 200:
-    print request.textdata = json.loads(json.dumps({
-    'timestamp': timestamp,
-    'counts': , counts
-    'volts': val,
-    'mbar': mbar
-}, default=serializer))
+}))
 
 request = requests.post(API_URL + 'ingest/', auth=(API_USER, API_PASS), json=data)
 
